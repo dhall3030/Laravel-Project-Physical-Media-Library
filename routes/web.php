@@ -61,11 +61,35 @@ Route::group(['middleware' => ['web','auth','role:user.admin']], function () {
 Route::group(['middleware' => ['web','auth','role:user.standard']], function () {
 
 
-	Route::get('admin-dashboard', 'AdminController@index');
+	//Route::get('admin-dashboard', 'AdminController@index');
 
 
 
 
 });
 //End Standard user routes
+
+
+//Media routes 
+
+Route::group(['middleware' => ['web','auth']], function () {
+
+
+	
+	Route::get('/media', 'MediaController@getMedia');
+	Route::post('media', ['as' => 'media', 'uses' =>'MediaController@getMedia']);
+
+	Route::get('create-media', 'MediaController@createMedia');
+	Route::post('create-media', ['as' => 'create-media', 'uses' =>'MediaController@createMedia']);
+
+	Route::get('update-media/{media_id}', 'MediaController@updateMedia');
+	Route::post('update-media/{media_id}', ['as' => 'update-media', 'uses' =>'MediaController@updateMedia']);
+
+	Route::get('get-profile/{media_id}', 'MediaController@getMediaProfile');
+
+	Route::get('delete-media/{media_id}', 'MediaController@deleteMedia');
+
+
+
+});
 

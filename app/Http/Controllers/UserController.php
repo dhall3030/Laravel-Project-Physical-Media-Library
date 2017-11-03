@@ -140,6 +140,9 @@ class UserController extends Controller
     public function authenticate()
     {
 
+        //die("hello");
+
+
         $rules = array(
             'email'    => 'required|email', 
             'password' => 'required|alphaNum|min:6' 

@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-
+use Auth;
 use App\User;
 use App\Media;
 use App\Media_Type;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 
 
-class MediaLibController extends Controller
+class MediaController extends Controller
 {
 
     
@@ -110,6 +110,7 @@ class MediaLibController extends Controller
             $description = Input::get('description');;
             $media_type_id = Input::get('media_type_id');
             $media = new Media;
+            $media->user_id = Auth::user()->id;
             $media->name = $name;
             $media->description = $description;
             $media->media_type_id = $media_type_id;
@@ -154,6 +155,7 @@ class MediaLibController extends Controller
                 $media_type_id = Input::get('media_type_id');
                 $media->name = $name;
                 $media->description = $description;
+                $media->number_of_copies = $number_of_copies;
                 $media->media_type_id = $media_type_id;
                 $media->save();
                 return Redirect::to('/media/')->withFlashMessage('Media Item Updated Successfully.');
