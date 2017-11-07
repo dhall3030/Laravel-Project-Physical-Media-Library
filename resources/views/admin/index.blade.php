@@ -34,6 +34,7 @@
 	<br>
 	<ul>
 	<li><a href ="{{ App::make('url')->to('/') }}/logout">Logout</a></li>
+	<li><a href ="{{ App::make('url')->to('/') }}/media">Media</a></li>
 	</ul>
 
 

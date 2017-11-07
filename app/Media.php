@@ -11,8 +11,18 @@ class Media extends Model
      public $primaryKey ='media_id';
 
 
-     public function media_type()
-	 {
+    public function media_type()
+	{
        return $this->belongsTo('App\Media_Type', 'media_type_id', 'media_type_id');
-	 }
+	}
+
+
+	
+	public function image()
+  	{
+    	return $this->morphMany('App\Image', 'image');
+  	}
+
+
+
 }

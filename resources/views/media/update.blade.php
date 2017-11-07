@@ -49,6 +49,27 @@
 		{!! Form::submit('Submit') !!}
 		{!! Form::close() !!}
 
+		<h3>Upload images:</h3>	
+
+		{!! Form::open(array('route' => array('upload-multiple',$media->media_id) , 'name' => 'uploadForm' , 'files' => true  )) !!}
+	 
+	 	
+	 	<p>{!! Form::file('image[]' , array('multiple' => 'true')  ) !!}</p>
+
+
+		<p>{!! Form::submit('Submit') !!}</p>
+
+		{!! Form::hidden('Go') !!}
+
+		
+		{!! Form::close() !!}
+
+
+
+		@foreach ($media->image as $image)
+   		 <p>{{$image->file_name}}</p>
+  		@endforeach
+
 		
 
 

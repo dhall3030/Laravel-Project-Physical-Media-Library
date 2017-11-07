@@ -87,7 +87,10 @@ Route::group(['middleware' => ['web','auth']], function () {
 
 	Route::get('get-profile/{media_id}', 'MediaController@getMediaProfile');
 
-	Route::get('delete-media/{media_id}', 'MediaController@deleteMedia');
+	Route::get('delete-media/{media_id}', 'MediaController@deleteMedia'); 
+
+	Route::get('upload-multiple/{media_id}', 'MediaController@uploadMultiple');
+	Route::post('upload-multiple/{media_id}', ['as' => 'upload-multiple', 'uses' => 'MediaController@uploadMultiple']);
 
 
 

@@ -4,6 +4,7 @@ use Auth;
 use App\User;
 use App\Media;
 use App\Media_Type;
+use App\Image;
 use Input;
 use File;
 use App\Utilities\ImageManipulator;
@@ -115,6 +116,23 @@ class MediaController extends Controller
             $media->description = $description;
             $media->media_type_id = $media_type_id;
             $media->save();
+            
+
+
+            //add image 
+
+            
+            $i = new Image();
+
+            $i->file_name = 'image.jpg';
+
+
+            $media->image()->save($i);  
+
+            //
+
+
+
             return Redirect::to('/media/')->withFlashMessage('Media Item Created Successfully.');
             }
         }
@@ -185,7 +203,16 @@ class MediaController extends Controller
 
     public function deleteMedia($media_id)
     {
-        $deletedRows = Media::where('media_id', $media_id)->delete();
+        
+        $media = Media::find($media_id);
+
+
+        $media->image()->delete();
+
+        $media->delete();
+
+        //$deletedRows = Media::where('media_id', $media_id)->delete();
+        
         return Redirect::to('/media/')->withFlashMessage('Item Deleted Successfully.');
     }
 
@@ -231,6 +258,71 @@ class MediaController extends Controller
 
 
     }
+
+
+
+    public function uploadMultiple($media_id)
+    {
+
+        if(Input::exists('Go')===true)
+        {
+
+            $date = date('Y-m-d H:i:s');
+
+
+            $files = Input::file('image');
+
+           
+
+            foreach($files as $file) {
+
+                $rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+                $validator = Validator::make(array('file'=> $file), $rules); 
+
+                if($validator->passes()){   
+
+
+                echo $file->getClientOriginalName()."<br>";
+
+                $imageName =   md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+
+                $file->move(base_path() . '/public/images/', $imageName);
+
+                $folder ='images';
+
+                ResizeImage::processImage($imageName , $folder);
+
+                
+
+                $media = Media::find($media_id);
+
+                $image = new Image();
+
+                $image->file_name = $imageName;
+
+
+                $media->image()->save($image);  
+
+
+
+
+
+                }
+
+
+            }
+
+            return Redirect::to('/update-media/'.$media_id)->withFlashMessage('Image uploaded Successfully.');
+
+        }
+
+    }
+
+
+
+
+
+
 
 
 
