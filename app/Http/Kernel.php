@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'role' => \HttpOz\Roles\Middleware\VerifyRole::class,
         'group' => \HttpOz\Roles\Middleware\VerifyGroup::class,
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 }

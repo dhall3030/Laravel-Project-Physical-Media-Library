@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('password');
             $table->string('status')->default('active');
+            $table->string('api_token', 60)->unique();
             $table->rememberToken();
             $table->timestamps();
             $table->timestamp('last_login')->nullable();

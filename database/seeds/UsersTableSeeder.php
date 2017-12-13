@@ -20,7 +20,8 @@ class UsersTableSeeder extends Seeder
 		        'name' => 'Dorian',
 		        'email' => 'dorian@selfip.net',
 		        'phone' => '000 000 0000',
-		        'password' => bcrypt('password')
+		        'password' => bcrypt('password'),
+		        'api_token' => uniqid()
 		    ]);
 
 		    // 2b. Create forum moderator
@@ -28,7 +29,8 @@ class UsersTableSeeder extends Seeder
 		        'name' => 'John Doe',
 		        'phone' => '000 000 0000',
 		        'email' => 'john@github.com',
-		        'password' => bcrypt('password')
+		        'password' => bcrypt('password'),
+		        'api_token' => uniqid()
 		    ]);
 
 		    // 3. Attach a role to the user object / assign a role to a user
