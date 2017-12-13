@@ -12,19 +12,16 @@
   <div class="container">
 
 
-      <div id="app">
-       <!--  @{{ media }} -->
-      
+    <div id="app">
+    @{{ status }}
 
-          <ol>
+    <ol>
             <li v-for="item in media">
              @{{ item.name }}
            </li>
-          </ol>
+        </ol>
 
-
-
-      </div>
+</div>
 
 
 
@@ -35,39 +32,42 @@
 var app = new Vue({
   el: '#app',
   data: {
+    status: '',
     media: ''
   },
   created: function () {
 
-  	this.loadMedia();
+    this.loadMedia();
 
   },
   methods: {
 
-  	loadMedia: function () {
+    loadMedia: function () {
 
-  		this.media='Loading...';
-  		var app = this;
-  		//axios.get('http://ron-swanson-quotes.herokuapp.com/v2/quotes')
-  		axios.get('http://pml/api/media?api_token=5a3067feef66b')
-  		.then(function(response){
+      this.status='Loading...';
+      var app = this;
+      //axios.get('http://ron-swanson-quotes.herokuapp.com/v2/quotes')
+      axios.get('http://pml/api/media?api_token=5a3067feef66b')
+      .then(function(response){
 
-  		
-  			//console.log('hello');
+      
+        
+
+      //app.status = response.data[0];
+
+      app.status = 'Load complete.';
+      app.media = response.data
 
 
-  		app.media = response.data;
 
+      })
+      .catch(function (error){
 
+      app.status = 'An error occured.'+ error;
 
-  		})
-  		.catch(function (error){
+      });
 
-  		app.media = 'An error occured.'+ error;
-
-  		});
-
-	}
+  }
 
 
 
@@ -77,13 +77,17 @@ var app = new Vue({
   }
 })
 
+
+
+
+
+
 </script>
 
 
-@stop
-
-
-  </div>
+</div>
 
 
 </section>
+
+@stop
