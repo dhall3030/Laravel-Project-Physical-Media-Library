@@ -98,6 +98,7 @@ class UserController extends Controller
                 	 $user->phone =  $phone;
                      $user->email =  $email;
                      $user->password = $password;
+                     $user->api_token = str_random(60);
                      //$user->role_id = 1;
                      
                      $user->last_login = $date;
@@ -111,7 +112,7 @@ class UserController extends Controller
 
                      $user->save();
 
-                     //$user->roles()->attach(1);
+                     $user->roles()->attach(2);
 
                      
 
@@ -170,7 +171,7 @@ class UserController extends Controller
             {
 
                     $errors = new MessageBag(['password' => ['Email and/or password invalid.']]); 
-                    return Redirect::to('user-login')->withErrors($errors)->withInput(Input::except('password'));
+                    return Redirect::to('/login')->withErrors($errors)->withInput(Input::except('password'));
 
 
             }
