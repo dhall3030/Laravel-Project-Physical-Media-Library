@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\User;
-use App\Media;
+use App\Media_Type;
 
-
-class APIController extends Controller
+class ApiMediaTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +15,8 @@ class APIController extends Controller
      */
     public function index()
     {
-       
-        $media = Media::all();
-        return response()->json($media);
-
-
+        $mediaTypes = Media_Type::all();
+        return response()->json($mediaTypes);
     }
 
     /**
@@ -32,8 +27,6 @@ class APIController extends Controller
     public function create()
     {
         //
-
-        
     }
 
     /**
@@ -44,19 +37,10 @@ class APIController extends Controller
      */
     public function store(Request $request)
     {
-            $name = $request->name;
-            $user_id = $request->user_id;
-            $name = $request->name;
-            $number_of_copies = $request->number_of_copies;
-            $description = $request->description;
-            $media_type_id = $request->media_type_id;
-            
-            $media = new Media;
-            //$media->user_id = Auth::user()->id;
-            $media->user_id = $user_id;
+         $name = $request->name;
+
+            $media = new Media_Type;
             $media->name = $name;
-            $media->description = $description;
-            $media->media_type_id = $media_type_id;
             $media->save();
 
 
@@ -105,6 +89,13 @@ class APIController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $mediaType = Media_Type::find($id);
+
+
+        $mediaType->delete();
+
+
+        return response()->json($id);
     }
 }

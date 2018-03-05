@@ -40,6 +40,8 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            //'cors' => \App\Http\Middleware\Cors::class,
+            //\Barryvdh\Cors\HandleCors::class,
         ],
     ];
 
@@ -59,6 +61,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'role' => \HttpOz\Roles\Middleware\VerifyRole::class,
         'group' => \HttpOz\Roles\Middleware\VerifyGroup::class,
-        'cors' => \App\Http\Middleware\Cors::class,
+        //'cors' => \App\Http\Middleware\Cors::class,
+        'cors' => \Barryvdh\Cors\HandleCors::class,
     ];
 }

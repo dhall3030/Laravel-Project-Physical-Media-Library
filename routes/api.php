@@ -24,6 +24,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // });
 
 
-Route::group(['middleware' => ['auth:api','cors']], function () {
+Route::group(['middleware' => ['cors','auth:api']], function () {
     Route::resource('media', 'APIController');
+    Route::resource('media-types', 'ApiMediaTypesController');
+   // Route::resource('media-types/{id}', 'ApiMediaTypesController');
+
 });
+
+

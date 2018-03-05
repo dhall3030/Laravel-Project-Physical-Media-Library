@@ -31,6 +31,11 @@ Route::get('/getjson', function () {
 });
 
 
+Route::get('/postjson', function () {
+    return view('test2');
+});
+
+
 
 
 Auth::routes();
