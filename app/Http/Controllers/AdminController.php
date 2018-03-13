@@ -26,7 +26,7 @@ class AdminController extends Controller
 
     	$hello = "welcome to the dashboard";
 
-    	return view('admin.index',['hello' => $hello]);
+    	return view('user.dashboard',['hello' => $hello]);
 
     }
 

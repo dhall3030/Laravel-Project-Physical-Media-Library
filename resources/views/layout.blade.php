@@ -41,7 +41,7 @@
 		 
 
 		 @if (Auth::check())
-		 <li><a href ="{{ App::make('url')->to('/') }}/admin-dashboard">Home</a></li>
+		 <li><a href ="{{ App::make('url')->to('/') }}/dashboard">Home</a></li>
 		 <li><a href ="{{ App::make('url')->to('/') }}/logout">Logout</a></li>
 		 @else
 

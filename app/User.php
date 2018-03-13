@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use HttpOz\Roles\Traits\HasRole;
@@ -10,7 +11,7 @@ use HttpOz\Roles\Contracts\HasRole as HasRoleContract;
 
 class User extends Authenticatable implements HasRoleContract
 {
-    use Notifiable, HasRole;
+    use HasApiTokens,Notifiable,HasRole;
 
     /**
      * The attributes that are mass assignable.

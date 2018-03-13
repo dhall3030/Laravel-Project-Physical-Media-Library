@@ -105,6 +105,12 @@ class APIController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $media = Media::find($id);
+
+
+        $media->delete();
+
+
+        return response()->json($id);
     }
 }

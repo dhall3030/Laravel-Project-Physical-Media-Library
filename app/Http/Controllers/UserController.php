@@ -124,7 +124,7 @@ class UserController extends Controller
 
 
 
-                     return Redirect::to('admin-dashboard')->withFlashMessage('User Created Successfully.');
+                     return Redirect::to('dashboard')->withFlashMessage('User Created Successfully.');
 
                 }
 
@@ -199,18 +199,18 @@ class UserController extends Controller
 
                 $user->save();
 
-                    if ($user->isRole('user.admin')) { 
+                    // if ($user->isRole('user.admin')) { 
 
-                        return redirect()->intended('admin-dashboard'); 
+                    //     return redirect()->intended('admin-dashboard'); 
            
-                    }
-                    if ($user->isRole('user.standard')) { 
+                    // }
+                    // if ($user->isRole('user.standard')) { 
 
-                        die('hello standard user');
+                    //     die('hello standard user');
            
-                    }
+                    // }
 
-
+                    return redirect()->intended('dashboard'); 
                 
 
                 

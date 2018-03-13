@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 
 
@@ -25,31 +25,10 @@ use Illuminate\Http\Request;
 
 
 Route::group(['middleware' => ['cors','auth:api']], function () {
-    
-	
-
-Route::get('userDetails', 'ApiUserController@userDetails');
-
-
-    
-   
+    Route::resource('media', 'APIController');
+    Route::resource('media-types', 'ApiMediaTypesController');
+   // Route::resource('media-types/{id}', 'ApiMediaTypesController');
 
 });
-
-
-Route::group(['middleware' => 'cors'], function () {
-
-Route::resource('media', 'APIController');
-Route::resource('media-types', 'ApiMediaTypesController');	
-
-Route::post('userLogin', 'ApiUserController@userLogin');
-Route::post('userRegister', 'ApiUserController@userRegister');
-
-
-
-
-});
-
-
 
 

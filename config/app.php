@@ -172,6 +172,7 @@ return [
 ````````*/
          Collective\Html\HtmlServiceProvider::class,
          HttpOz\Roles\RolesServiceProvider::class,
+         Laravel\Passport\PassportServiceProvider::class,
 
         /*
          * Application Service Providers...
