@@ -30,17 +30,17 @@ Route::group(['middleware' => ['cors','auth:api']], function () {
 
 Route::get('userDetails', 'ApiUserController@userDetails');
 
-
+Route::resource('media', 'APIController');
     
-   
+Route::resource('media-types', 'ApiMediaTypesController');	   
 
 });
 
 
 Route::group(['middleware' => 'cors'], function () {
 
-Route::resource('media', 'APIController');
-Route::resource('media-types', 'ApiMediaTypesController');	
+
+
 
 Route::post('userLogin', 'ApiUserController@userLogin');
 Route::post('userRegister', 'ApiUserController@userRegister');

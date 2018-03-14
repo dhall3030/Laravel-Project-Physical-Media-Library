@@ -26,7 +26,7 @@ class ApiUserController extends Controller
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
-            return response()->json(['success' => $success], 200);
+            return response()->json(['success' => $success,'userId' => $user->id], 200);
         }
         else{
             return response()->json(['error'=>'Unauthorised'], 401);
@@ -51,7 +51,7 @@ class ApiUserController extends Controller
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
-        return response()->json(['success'=>$success], 200);
+        return response()->json(['success'=>$success,'userId' => $user->id], 200);
     }
 
 
