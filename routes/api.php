@@ -28,11 +28,17 @@ Route::group(['middleware' => ['cors','auth:api']], function () {
     
 	
 
-Route::get('userDetails', 'ApiUserController@userDetails');
+	Route::get('userDetails', 'ApiUserController@userDetails');
 
-Route::resource('media', 'APIController');
-    
-Route::resource('media-types', 'ApiMediaTypesController');	   
+
+	//media routes
+	Route::resource('media', 'APIController');
+
+	Route::get('getMedia/{user_id}', 'APIController@getMedia');
+	    
+
+	//media types
+	Route::resource('media-types', 'ApiMediaTypesController');	   
 
 });
 
@@ -41,9 +47,9 @@ Route::group(['middleware' => 'cors'], function () {
 
 
 
-
-Route::post('userLogin', 'ApiUserController@userLogin');
-Route::post('userRegister', 'ApiUserController@userRegister');
+	//user routes
+	Route::post('userLogin', 'ApiUserController@userLogin');
+	Route::post('userRegister', 'ApiUserController@userRegister');
 
 
 

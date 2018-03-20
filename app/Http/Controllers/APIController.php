@@ -25,6 +25,21 @@ class APIController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getMedia($user_id)
+    {
+       
+        $media = Media::where('user_id', $user_id )->orderBy("name")->get();
+        
+        return response()->json($media);
+
+
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -57,6 +72,7 @@ class APIController extends Controller
             $media->name = $name;
             $media->description = $description;
             $media->media_type_id = $media_type_id;
+            $media->number_of_copies = $number_of_copies;
             $media->save();
 
 
@@ -105,6 +121,8 @@ class APIController extends Controller
      */
     public function destroy($id)
     {
+        
+
         $media = Media::find($id);
 
 
