@@ -92,8 +92,19 @@ class ApiMediaTypesController extends Controller
         
         $mediaType = Media_Type::find($id);
 
+        try {
 
-        $mediaType->delete();
+             $mediaType->delete();
+
+        }catch (\Illuminate\Database\QueryException $e){
+
+            //var_dump($e->errorInfo);
+
+            return response()->json($e->errorInfo[0]);
+
+
+        }
+       
 
 
         return response()->json($id);

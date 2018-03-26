@@ -51,7 +51,7 @@ class ApiUserController extends Controller
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
-        return response()->json(['success'=>$success,'userId' => $user->id], 200);
+        return response()->json(['success'=>$success,'userId' => $user->id ,'user' => $user], 200);
     }
 
 
