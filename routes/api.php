@@ -32,9 +32,9 @@ Route::group(['middleware' => ['cors','auth:api']], function () {
 
 
 	//media routes
-	Route::resource('media', 'APIController');
+	Route::resource('media', 'ApiMediaController');
 
-	Route::get('getMedia/{user_id}', 'APIController@getMedia');
+	Route::get('getMedia/{user_id}', 'ApiMediaController@getMedia');
 	    
 
 	//media types

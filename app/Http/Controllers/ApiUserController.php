@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Validator;
 use App\User;
+use App\Role;
 
 
 class ApiUserController extends Controller
@@ -25,6 +26,32 @@ class ApiUserController extends Controller
 
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
+
+            //update login timestamps
+            $updateUser = User::find($user->id);
+            
+            $date = date('Y-m-d H:i:s');
+
+                if(is_null($updateUser->current_login))
+
+                {
+
+                $updateUser->current_login=$date;
+                $user->current_login=$date;
+                $user->last_login = $updateUser->current_login;
+                }               
+
+            $updateUser->last_login = $updateUser->current_login;
+
+
+            
+            $updateUser->current_login = $date;
+
+            $updateUser->save();
+            // end update login timestamps
+
+
+
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             return response()->json(['success' => $success,'user' => $user], 200);
         }
@@ -49,6 +76,7 @@ class ApiUserController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
+        $user->roles()->attach(2);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
         return response()->json(['success'=>$success,'userId' => $user->id ,'user' => $user], 200);

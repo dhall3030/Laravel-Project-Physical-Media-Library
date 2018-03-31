@@ -33,7 +33,7 @@ class MediaController extends Controller
 
     
     //
-    $media = Media::orderBy("name")->paginate(15);
+    $media = Media::where('user_id',Auth::user()->id)->orderBy("name")->paginate(15);
 
     
     //search media
@@ -49,7 +49,7 @@ class MediaController extends Controller
             $value = Input::get('value');
             $media_type_id = Input::get('media_type_id');
 
-            $media = Media::where('name', 'like', '%' . $value . '%')->where('media_type_id', $media_type_id )->orderBy("name")->paginate(15);
+            $media = Media::where('user_id',Auth::user()->id)->where('name', 'like', '%' . $value . '%')->where('media_type_id', $media_type_id )->orderBy("name")->paginate(15);
 
         }
 
